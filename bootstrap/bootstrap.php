@@ -49,6 +49,18 @@ class erLhcoreClassExtension2fa
         }
     }
 
+    /**
+     * Checks automated hosting structure
+     *
+     * This part is executed once in manager is run this cronjob.
+     * php cron.php -s site_admin -e instance -c cron/extensions_update
+     *
+     * */
+    public function checkStructure()
+    {
+        erLhcoreClassUpdate::doTablesUpdate(json_decode(file_get_contents('extension/2fa/doc/structure.json'), true));
+    }
+
     public function twoFactorAuthenticationInfo($twofa)
     {
         if (class_exists('erLhcoreClassExtension2FAHandler' . $twofa['2fa']->method)) {
