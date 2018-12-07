@@ -1,0 +1,24 @@
+{
+    "name": "livehelperchat/2fa",
+    "version": "1.0",
+    "description": "Extension for live helper chat with 2fa",
+    "type": "project",
+    "homepage": "http://ivehelperchat.com",
+    "license": "Apache-2.0",
+    "authors": [
+        {
+            "name": "Live helper Chat",
+            "homepage": "http://ivehelperchat.com"
+        }
+    ],
+    "support": {
+        "email": "remdex@mgmail.com"      
+    },
+    "require": {
+        "sonata-project/google-authenticator": "^3.0@dev"
+    },
+    "minimum-stability": "dev",       
+    "config": {
+        "vendor-dir": "vendor"
+    }
+}

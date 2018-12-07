@@ -1,0 +1,32 @@
+{
+    "tables": {
+        "lhc_2fa_user": [
+            {
+                "field": "id",
+                "type": "bigint(20)",
+                "null": "NO",
+                "key": "PRI",
+                "default": null,
+                "extra": "auto_increment"
+            }
+        ],
+        "lhc_2fa_session": [
+            {
+                "field": "id",
+                "type": "bigint(20)",
+                "null": "NO",
+                "key": "PRI",
+                "default": null,
+                "extra": "auto_increment"
+            }
+        ]
+    },
+    "tables_data": {    },
+    "tables_data_identifier": {    },
+    "tables_indexes" : {
+    },
+    "tables_create": {
+    	"lhc_2fa_user" : "CREATE TABLE `lhc_2fa_user` ( `id` bigint(20) NOT NULL AUTO_INCREMENT, `user_id` bigint(20) NOT NULL,`method` varchar(100) NOT NULL DEFAULT '',`attr` text NOT NULL, `enabled` tinyint(1) NOT NULL,`default` tinyint(1) NOT NULL,PRIMARY KEY (`id`), KEY `user_id` (`user_id`)) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;",
+    	"lhc_2fa_session" : "CREATE TABLE `lhc_2fa_session` (`id` bigint(20) NOT NULL AUTO_INCREMENT,`user_id` bigint(20) NOT NULL,`ctime` int(11) NOT NULL,`hash` varchar(40) NOT NULL, `valid` tinyint(1) NOT NULL, `retries` int(11) NOT NULL,`remember` tinyint(1) NOT NULL, PRIMARY KEY (`id`),KEY `user_id` (`user_id`), KEY `hash` (`hash`)) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;"
+    }
+}
