@@ -73,22 +73,11 @@ class erLhcoreClassExtension2fa
     
     public function twoFactorAuthentication($params) 
     {
-        $active2FA = erLhcoreClassModel2FAUser::getList(array('filter' => array('enabled' => 1, 'user_id' => $params['current_user']->getUserID())));
+        $active2FA = erLhcoreClassModel2FAUser::getList(array('sort' => '`default` DESC','filter' => array('enabled' => 1, 'user_id' => $params['current_user']->getUserID())));
 
         if (!empty($active2FA)) {
 
-            // Remove previous attempts
-            foreach (erLhcoreClassModel2FASession::getList(array('filter' => array('user_id' => $params['current_user']->getUserID()))) as $twofaSession){
-                $twofaSession->removeThis();
-            }
-
-            // Create a new 2FASession
-            $session = new erLhcoreClassModel2FASession();
-            $session->user_id = $params['current_user']->getUserID();
-            $session->ctime = time();
-            $session->hash = erLhcoreClassChat::generateHash();
-            $session->remember = (isset($params['remember']) && $params['remember'] == true) ? 1 : 0;
-            $session->saveThis();
+            $session = $this->generateSession($params['current_user']->getUserID(),((isset($params['remember']) && $params['remember'] == true) ? 1 : 0), $active2FA);
 
             // Logout user as we will login him after 2fa
             $params['current_user']->logout();
@@ -97,13 +86,38 @@ class erLhcoreClassExtension2fa
             exit;
         }
     }
-    
+
+    public function generateSession($userId, $remember, $active2FAList, $test = false) {
+
+        // Remove previous attempts
+        foreach (erLhcoreClassModel2FASession::getList(array('filter' => array('user_id' => $userId))) as $twofaSession){
+            $twofaSession->removeThis();
+        }
+
+        // Create a new 2FASession
+        $session = new erLhcoreClassModel2FASession();
+        $session->user_id = $userId;
+        $session->ctime = time();
+        $session->hash = erLhcoreClassChat::generateHash();
+        $session->remember = $remember;
+        $session->saveThis();
+
+        foreach ($active2FAList as $active2FA) {
+            if (class_exists('erLhcoreClassExtension2FAHandler' .$active2FA->method)) {
+                call_user_func('erLhcoreClassExtension2FAHandler' .$active2FA->method . '::prepareSession',array('total' => count($active2FA), 'test' => $test, 'session' => & $session, '2fa' => $active2FA));
+            }
+        }
+
+        return $session;
+    }
+
     public function autoload($className)
     {
         $classesArray = array(
             'erLhcoreClassModel2FAUser' => 'extension/2fa/classes/erlhcoreclassmodel2fauser.php',
             'erLhcoreClassModel2FASession' => 'extension/2fa/classes/erlhcoreclassmodel2fasession.php',
-            'erLhcoreClassExtension2FAHandlerga' => 'extension/2fa/classes/handlers/erlhcoreclassmodel2fahandlerga.php'
+            'erLhcoreClassExtension2FAHandlerga' => 'extension/2fa/classes/handlers/erlhcoreclassmodel2fahandlerga.php',
+            'erLhcoreClassExtension2FAHandlersms' => 'extension/2fa/classes/handlers/erlhcoreclassmodel2fahandlersms.php'
         );
 
         if (key_exists($className, $classesArray)) {

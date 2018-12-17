@@ -46,7 +46,7 @@ if (ezcInputForm::hasPostData()) {
     }
 }
 
-$link = \Sonata\GoogleAuthenticator\GoogleQrUrl::generate($userData->email, $secret, 'LiveHelperChat');
+$link = \Sonata\GoogleAuthenticator\GoogleQrUrl::generate($userData->email, $secret, 'LiveHelperChatIconnectel');
 
 $tpl->set('img', $link);
 $tpl->set('instance', $instance);

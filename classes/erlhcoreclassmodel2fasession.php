@@ -22,7 +22,58 @@ class erLhcoreClassModel2FASession
             'valid' => $this->valid,
             'retries' => $this->retries,
             'remember' => $this->remember,
+            'attr' => $this->attr,
         );
+    }
+
+    public function __get($var)
+    {
+        switch ($var) {
+
+            case 'attr_array':
+                $this->attr_array = array();
+
+                if ($this->attr != '') {
+                    $attr = json_decode($this->attr, true);
+                    if (is_array($attr)) {
+                        $this->attr_array = $attr;
+                    }
+                }
+                return $this->attr_array;
+                break;
+
+            default:
+                ;
+                break;
+        }
+    }
+
+    public function removeAttribute($attr)
+    {
+        if (isset($this->attr_array[$attr])) {
+            $attrArray = $this->attr_array;
+            unset($attrArray[$attr]);
+
+            $this->attr_array = $attrArray;
+            $this->attr = json_encode($attrArray);
+            $this->saveThis();
+        }
+    }
+
+    public function getAttribute($attr) {
+        if (isset($this->attr_array[$attr])) {
+            return $this->attr_array[$attr];
+        }
+        return null;
+    }
+
+    public function setAttribute($attr, $val) {
+        $attrArray = $this->attr_array;
+        $attrArray[$attr] = $val;
+
+        $this->attr_array = $attrArray;
+        $this->attr = json_encode($attrArray);
+        $this->saveThis();
     }
 
     public $id = null;
@@ -38,6 +89,8 @@ class erLhcoreClassModel2FASession
     public $remember = 0;
 
     public $hash = '';
+
+    public $attr = '';
 }
 
 ?>

@@ -39,6 +39,11 @@ $def->properties['hash']->columnName   = 'hash';
 $def->properties['hash']->propertyName = 'hash';
 $def->properties['hash']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_STRING;
 
+$def->properties['attr'] = new ezcPersistentObjectProperty();
+$def->properties['attr']->columnName   = 'attr';
+$def->properties['attr']->propertyName = 'attr';
+$def->properties['attr']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_STRING;
+
 return $def;
 
 ?>

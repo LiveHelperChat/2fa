@@ -7,6 +7,7 @@ $session = erLhcoreClassModel2FASession::findOne(array('filter' => array('hash' 
 if ($session instanceof erLhcoreClassModel2FASession && $session->ctime > (time()-(10*60))) {
     $tpl->set('methods', erLhcoreClassModel2FAUser::getList(array('sort' => '`default` DESC','filter' => array('enabled' => 1, 'user_id' => $session->user_id))));
     $tpl->set('hash', $session->hash);
+    $tpl->set('session', $session);
 } else {
     $tpl->set('errors', array(erTranslationClassLhTranslation::getInstance()->getTranslation('2fa/admin','Verification hash has expired!')));
 }

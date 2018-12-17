@@ -3,7 +3,8 @@
 <div class="row">
     <div class="col-sm-4">
         <ul>
-            <a href="<?php echo erLhcoreClassDesign::baseurl('2fa/googleauthentificator')?>"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('2fa/admin','Google Authentificator')?></a>
+            <li><a href="<?php echo erLhcoreClassDesign::baseurl('2fa/googleauthentificator')?>"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('2fa/admin','Google Authentificator')?></a></li>
+            <li><a href="<?php echo erLhcoreClassDesign::baseurl('2fa/sms')?>"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('2fa/admin','SMS')?></a></li>
         </ul>
     </div>
 </div>

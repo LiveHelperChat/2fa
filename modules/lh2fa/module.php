@@ -23,6 +23,18 @@ $ViewList['verifyga'] = array(
     'functions' => array()
 );
 
+$ViewList['verifysms'] = array(
+    'params' => array('hash'),
+    'uparams' => array(),
+    'functions' => array()
+);
+
+$ViewList['resendsms'] = array(
+    'params' => array('hash'),
+    'uparams' => array(),
+    'functions' => array()
+);
+
 $ViewList['loginbyhash'] = array(
     'params' => array('hash'),
     'uparams' => array(),
@@ -30,6 +42,12 @@ $ViewList['loginbyhash'] = array(
 );
 
 $ViewList['googleauthentificator'] = array(
+    'params' => array(),
+    'uparams' => array(),
+    'functions' => array('configure')
+);
+
+$ViewList['sms'] = array(
     'params' => array(),
     'uparams' => array(),
     'functions' => array('configure')

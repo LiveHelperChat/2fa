@@ -12,19 +12,19 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/GoogleAuthenticator.git",
-                "reference": "efd263080e258886072adcafe3b726d131e05a35"
+                "reference": "c135b41802941dcf76185b756bd86ffe7905bb84"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/GoogleAuthenticator/zipball/efd263080e258886072adcafe3b726d131e05a35",
-                "reference": "efd263080e258886072adcafe3b726d131e05a35",
+                "url": "https://api.github.com/repos/sonata-project/GoogleAuthenticator/zipball/c135b41802941dcf76185b756bd86ffe7905bb84",
+                "reference": "c135b41802941dcf76185b756bd86ffe7905bb84",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.1"
             },
             "require-dev": {
-                "symfony/phpunit-bridge": "^4.0"
+                "symfony/phpunit-bridge": "^4.1"
             },
             "type": "library",
             "extra": {
@@ -61,7 +61,7 @@
             "keywords": [
                 "google authenticator"
             ],
-            "time": "2018-11-25T01:00:17+00:00"
+            "time": "2018-12-07T07:02:07+00:00"
         }
     ],
     "packages-dev": [],

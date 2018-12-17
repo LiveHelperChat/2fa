@@ -1,5 +1,7 @@
-<p><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('2fa/admin','Choose 2FA method')?></p>
-
+<?php if (isset($errors)) : ?>
+    <?php include(erLhcoreClassDesign::designtpl('lhkernel/validation_error.tpl.php'));?>
+    <a class="btn btn-default" href="<?php echo erLhcoreClassDesign::baseurl('user/login')?>">Login</a>
+<?php else : ?>
 <input type="hidden" id="twofahash" value="<?php echo $hash?>" />
 
 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
@@ -20,10 +22,11 @@
             </div>
             <div id="collapse-<?php echo $method->method?>" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading-<?php echo $method->method?>">
                 <div class="panel-body">
-                    <?php echo $info->getBody(); ?>
+                    <?php echo $info->getBody($session); ?>
                 </div>
             </div>
         </div>
         <?php endif; ?>
     <?php endforeach; ?>
 </div>
+<?php endif; ?>
