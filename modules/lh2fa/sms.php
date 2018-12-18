@@ -31,6 +31,11 @@ if (ezcInputForm::hasPostData()) {
 
             try {
                 $session = $twofa->generateSession($currentUser->getUserID(), false, array($instance), true);
+
+                if ($session->getAttribute('sms_error') !== null){
+                    throw new Exception($session->getAttribute('sms_error'));
+                }
+
                 $tpl->set('smssend',true);
             } catch (Exception $e) {
                 $tpl->set('errors', array($e->getMessage()));

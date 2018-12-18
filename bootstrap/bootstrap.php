@@ -104,7 +104,7 @@ class erLhcoreClassExtension2fa
 
         foreach ($active2FAList as $active2FA) {
             if (class_exists('erLhcoreClassExtension2FAHandler' .$active2FA->method)) {
-                call_user_func('erLhcoreClassExtension2FAHandler' .$active2FA->method . '::prepareSession',array('total' => count($active2FA), 'test' => $test, 'session' => & $session, '2fa' => $active2FA));
+                call_user_func('erLhcoreClassExtension2FAHandler' .$active2FA->method . '::prepareSession',array('total' => count($active2FAList), 'test' => $test, 'session' => & $session, '2fa' => $active2FA));
             }
         }
 
