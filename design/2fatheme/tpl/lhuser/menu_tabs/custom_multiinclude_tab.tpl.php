@@ -1,0 +1,1 @@
+<li role="presentation" <?php if ($tab == 'tab_2fa') : ?>class="active"<?php endif;?>><a href="#twofa" aria-controls="permission" role="tab" data-toggle="tab"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('user/account','Security Preferences');?></a></li>

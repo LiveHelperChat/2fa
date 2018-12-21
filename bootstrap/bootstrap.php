@@ -20,6 +20,17 @@ class erLhcoreClassExtension2fa
 
         $dispatcher->listen('user.2fa_method_info', array($this, 'twoFactorAuthenticationInfo'));
 
+        $dispatcher->listen('user.account', array($this, 'validate2FAaccountSettings'));
+
+        // New user window was loaded. So we just save temporary 2fa settings
+        $dispatcher->listen('user.new_user', array($this, 'validate2FAaccountSettingsNew'));
+
+        // User was created so now we can save not only temporary store settings
+        $dispatcher->listen('user.user_created', array($this, 'validate2FAaccountSettingsCreated'));
+
+        // User edit save clicked
+        $dispatcher->listen('user.edit_user_window', array($this, 'validate2FAaccountSettings'));
+
         $dispatcher->listen('instance.extensions_structure', array(
             $this,
             'checkStructure'
@@ -46,6 +57,101 @@ class erLhcoreClassExtension2fa
             erLhcoreClassUpdate::doTablesUpdate(json_decode(file_get_contents('extension/2fa/doc/structure.json'), true));
         } catch (Exception $e) {
             erLhcoreClassLog::write(print_r($e, true));
+        }
+    }
+
+    public function validate2FAaccountSettingsNew($params) {
+        $params = array_merge($params, array('new_user_validation' => true));
+        $this->validate2FAaccountSettings($params);
+    }
+
+    public function validate2FAaccountSettingsCreated($params) {
+        $params = array_merge($params, array('new_user_validation' => true));
+        $this->validate2FAaccountSettings($params);
+    }
+
+    public function validate2FAaccountSettings($params)
+    {
+        if (isset($_POST['savetwofa']) || isset($params['new_user_validation'])) {
+
+            if (isset($params['tpl'])) {
+                $params['tpl']->set('tab','tab_2fa');
+            }
+
+            $t2faOptions = erLhcoreClassModelChatConfig::fetch('2fa_options');
+            $dataOptions = (array)$t2faOptions->data;
+
+            $defaultProvider = isset($_POST['twofaDefault']) ? $_POST['twofaDefault'] : '';
+
+            if (isset($dataOptions['sms_enabled']) && $dataOptions['sms_enabled'] == true) {
+                $instance = erLhcoreClassModel2FAUser::getInstance($params['userData']->id, 'sms');
+                if ($defaultProvider == 'sms') {
+                    $instance->default = 1;
+                } else {
+                    $instance->default = 0;
+                }
+
+                if (isset($_POST['twofaphone'])){
+                    $instance->setAttribute('phone',$_POST['twofaphone']);
+                } else {
+                    $instance->setAttribute('phone','');
+                }
+
+                if (isset($_POST['twofasmsEnabled'])){
+                    $instance->enabled = 1;
+                } else {
+                    $instance->enabled = 0;
+                }
+
+                if ($params['userData']->id > 0) {
+                    $instance->saveThis();
+                }
+            }
+
+            if (isset($dataOptions['email_enabled']) && $dataOptions['email_enabled'] == true) {
+                $instance = erLhcoreClassModel2FAUser::getInstance($params['userData']->id, 'email');
+
+                if ($defaultProvider == 'email') {
+                    $instance->default = 1;
+                } else {
+                    $instance->default = 0;
+                }
+
+                if (isset($_POST['twofaemailEnabled'])) {
+                    $instance->enabled = 1;
+                } else {
+                    $instance->enabled = 0;
+                }
+
+                if ($params['userData']->id > 0) {
+                    $instance->saveThis();
+                }
+            }
+
+            if (isset($dataOptions['ga_enabled']) && $dataOptions['ga_enabled'] == true) {
+                $instance = erLhcoreClassModel2FAUser::getInstance($params['userData']->id, 'ga');
+
+                if ($defaultProvider == 'ga') {
+                    $instance->default = 1;
+                } else {
+                    $instance->default = 0;
+                }
+
+                if (isset($_POST['twofagaEnabled'])){
+                    $instance->enabled = 1;
+                } else {
+                    $instance->enabled = 0;
+                }
+
+                if ($params['userData']->id > 0) {
+                    $instance->saveThis();
+                }
+            }
+
+            if (isset($params['tpl'])) {
+                $params['tpl']->set('twosettingsupdated',true);
+            }
+
         }
     }
 
@@ -117,7 +223,8 @@ class erLhcoreClassExtension2fa
             'erLhcoreClassModel2FAUser' => 'extension/2fa/classes/erlhcoreclassmodel2fauser.php',
             'erLhcoreClassModel2FASession' => 'extension/2fa/classes/erlhcoreclassmodel2fasession.php',
             'erLhcoreClassExtension2FAHandlerga' => 'extension/2fa/classes/handlers/erlhcoreclassmodel2fahandlerga.php',
-            'erLhcoreClassExtension2FAHandlersms' => 'extension/2fa/classes/handlers/erlhcoreclassmodel2fahandlersms.php'
+            'erLhcoreClassExtension2FAHandlersms' => 'extension/2fa/classes/handlers/erlhcoreclassmodel2fahandlersms.php',
+            'erLhcoreClassExtension2FAHandleremail' => 'extension/2fa/classes/handlers/erlhcoreclassmodel2fahandleremail.php'
         );
 
         if (key_exists($className, $classesArray)) {

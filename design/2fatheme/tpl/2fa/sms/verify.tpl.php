@@ -5,17 +5,17 @@
         <?php include(erLhcoreClassDesign::designtpl('lhkernel/validation_error.tpl.php'));?>
     <?php endif; ?>
     </div>
-    <div class="col-xs-7">
+    <div class="col-sm-7 col-xs-12">
         <div class="form-group">
             <label><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('2fa/admin','Enter code')?></label>
             <input id="smsCode" type="text" class="form-control" value="" />
         </div>
     </div>
-    <div class="col-xs-5">
-        <div><label>&nbsp;</label></div>
-        <div class="btn-group pull-right" role="group">
+    <div class="col-sm-5 col-xs-12">
+        <div class="hidden-xs"><label>&nbsp;</label></div>
+        <div class="btn-group" role="group">
             <button type="button" class="btn btn-default btn-success" onclick="twofasms.verify($('#smsCode').val())"><i class="material-icons">verified_user</i><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('2fa/admin','Verify')?></button>
-            <button type="button" class="btn btn-info" onclick="twofasms.resend()"><i class="material-icons">sms</i>Resend</button>
+            <button type="button" class="btn btn-info" onclick="twofasms.resend()"><i class="material-icons">sms</i>Send</button>
         </div>
     </div>
 </div>

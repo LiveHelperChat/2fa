@@ -64,7 +64,10 @@ class erLhcoreClassModel2FAUser
 
         $this->attr_array = $attrArray;
         $this->attr = json_encode($attrArray);
-        $this->saveThis();
+        
+        if ($this->user_id > 0){
+            $this->saveThis();
+        }
     }
 
     public function getMethodInfo()
@@ -79,18 +82,33 @@ class erLhcoreClassModel2FAUser
     }
 
     public static function getInstance($userId, $method) {
-        $instance = self::findOne(array('filter' => array('user_id' => $userId, 'method' => $method)));
 
-        if ($instance instanceof erLhcoreClassModel2FAUser) {
-            return $instance;
+        if (isset(self::$instances[$userId . '_' . $method])) {
+            return self::$instances[$userId . '_' . $method];
+        }
+
+        if ($userId > 0) {
+            $instance = self::findOne(array('filter' => array('user_id' => $userId, 'method' => $method)));
+
+            if ($instance instanceof erLhcoreClassModel2FAUser) {
+                return $instance;
+            }
         }
 
         $instance = new erLhcoreClassModel2FAUser();
         $instance->user_id = $userId;
         $instance->method = $method;
-        $instance->saveThis();
+
+        if ($instance->user_id > 0) {
+            $instance->saveThis();
+        }
+
+        self::$instances[$userId . '_' . $method] = $instance;
+
         return $instance;
     }
+
+    private static $instances = array();
 
     public $id = null;
 

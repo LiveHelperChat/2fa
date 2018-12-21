@@ -27,14 +27,15 @@ class erLhcoreClassExtension2FAHandlersms {
     // Send SMS Event if it's required
     public static function prepareSession($params) {
 
-        $code = '';
-        for ($i = 1; $i <= 6; $i++) {
-            $code .= mt_rand(1,9);
-        }
+        if ($params['total'] == 1 || $params['2fa']->default == 1 || (isset($params['test']) && $params['test'] === true)) {
 
-        $params['session']->setAttribute('code',$code);
+            $code = '';
+            for ($i = 1; $i <= 6; $i++) {
+                $code .= mt_rand(1,9);
+            }
 
-        if ($params['total'] == 1 ||$params['2fa']->default == 1 || (isset($params['test']) && $params['test'] === true)) {
+            $params['session']->setAttribute('code',$code);
+
             try {
                 erLhcoreClassChatEventDispatcher::getInstance()->dispatch('user.2fa_sms', array( 'session' => $params['session'], '2fa' => $params['2fa']));
                 $params['session']->removeAttribute('sms_error');

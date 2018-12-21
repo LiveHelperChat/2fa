@@ -13,20 +13,32 @@ if ($session instanceof erLhcoreClassModel2FASession) {
         exit;
     }
 
-    $active2FA = erLhcoreClassModel2FAUser::findOne(array('filter' => array('method' => 'sms', 'enabled' => 1, 'user_id' => $session->user_id)));
+    $validMethod = array(
+        'sms',
+        'email',
+        'ga',
+    );
+
+    erLhcoreClassChatEventDispatcher::getInstance()->dispatch('chat.validstatus_chat', array('user.2fa_methods' => & $validMethod));
+
+    if (!in_array($Params['user_parameters']['method'], $validMethod)) {
+        echo json_encode(array('error' => true, 'msg' => 'Provided method is not valid!'));
+        exit;
+    }
+
+    $active2FA = erLhcoreClassModel2FAUser::findOne(array('filter' => array('method' => $Params['user_parameters']['method'], 'enabled' => 1, 'user_id' => $session->user_id)));
 
     if ($active2FA instanceof erLhcoreClassModel2FAUser) {
 
-        if (class_exists('erLhcoreClassExtension2FAHandlersms')) {
-            call_user_func('erLhcoreClassExtension2FAHandlersms::prepareSession',array('session' => & $session, '2fa' => $active2FA));
+        if (class_exists('erLhcoreClassExtension2FAHandler' . $Params['user_parameters']['method'])) {
+            call_user_func('erLhcoreClassExtension2FAHandler'.$Params['user_parameters']['method'].'::prepareSession',array('test' => true, 'session' => & $session, '2fa' => $active2FA));
         }
 
-        if ($session->getAttribute('sms_error') === null){
+        if ($session->getAttribute('sms_error') === null) {
             echo json_encode(array('error' => false, 'msg' => 'Verification code was send!'));
         } else {
             echo json_encode(array('error' => true, 'msg' => $session->getAttribute('sms_error')));
         }
-
 
     } else {
         echo json_encode(array('error' => true, 'msg' => erTranslationClassLhTranslation::getInstance()->getTranslation('2fa/admin','2FA Method could not be found')));

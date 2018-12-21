@@ -20,7 +20,7 @@
                     </a>
                 </h4>
             </div>
-            <div id="collapse-<?php echo $method->method?>" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading-<?php echo $method->method?>">
+            <div id="collapse-<?php echo $method->method?>" class="panel-collapse collapse<?php ($method->default == 1) ? print ' in' : ''?>" role="tabpanel" aria-labelledby="heading-<?php echo $method->method?>">
                 <div class="panel-body">
                     <?php echo $info->getBody($session); ?>
                 </div>

@@ -13,11 +13,32 @@ if ($session instanceof erLhcoreClassModel2FASession) {
         exit;
     }
 
-    $secret = erLhcoreClassModel2FAUser::findOne(array('filter' => array('method' => 'sms', 'enabled' => 1, 'user_id' => $session->user_id)));
+    $validMethod = array(
+        'sms',
+        'email',
+        'ga',
+    );
+
+    erLhcoreClassChatEventDispatcher::getInstance()->dispatch('chat.validstatus_chat', array('user.2fa_methods' => & $validMethod));
+
+    if (!in_array($Params['user_parameters']['method'], $validMethod)) {
+        echo json_encode(array('error' => true, 'msg' => 'Provided method is not valid!'));
+        exit;
+    }
+
+    $secret = erLhcoreClassModel2FAUser::findOne(array('filter' => array('method' => $Params['user_parameters']['method'], 'enabled' => 1, 'user_id' => $session->user_id)));
 
     if ($secret instanceof erLhcoreClassModel2FAUser) {
 
-        if ($session->getAttribute('code') == $_POST['code']) {
+        $codeValid = false;
+        if ($Params['user_parameters']['method'] == 'ga') {
+            $g = new \Google\Authenticator\GoogleAuthenticator();
+            $codeValid = $g->checkCode($secret->attr_array['secret'], $_POST['code']);
+        } else {
+            $codeValid = $session->getAttribute('code') == $_POST['code'];
+        }
+
+        if ($codeValid === true) {
 
             // Login by session hash will work now
             $session->valid = 1;

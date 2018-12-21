@@ -12,25 +12,22 @@
             <?php include(erLhcoreClassDesign::designtpl('lhkernel/alert_success.tpl.php'));?>
         <?php endif;?>
 
+        <?php if (isset($settingsupdated)) : ?>
+            <?php $msg = erTranslationClassLhTranslation::getInstance()->getTranslation('2fa/admin','Settings updated'); ?>
+            <?php include(erLhcoreClassDesign::designtpl('lhkernel/alert_success.tpl.php'));?>
+        <?php endif;?>
+
         <form action="" method="post">
-            <div class="row">
-                <div class="col-xs-6">
-                    <div class="form-group">
-                        <label><input value="on" type="checkbox" <?php if ($instance->enabled == true) : ?>checked="checked"<?php endif;?> name="Enabled" /><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('2fa/admin','Enabled for my account')?></label>
-                    </div>
-                </div>
-                <div class="col-xs-6">
-                    <div class="form-group">
-                        <label><input value="on" type="checkbox" <?php if ($instance->default == true) : ?>checked="checked"<?php endif;?> name="Default" /><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('2fa/admin','Default for my account')?></label>
-                    </div>
-                </div>
+            <h4><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('2fa/admin','Global settings')?></h4>
+            <label><input value="on" type="checkbox" <?php if (isset($tfaoptions['sms_enabled']) && $tfaoptions['sms_enabled'] == true) : ?>checked="checked"<?php endif;?>  name="sms_enabled" /><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('2fa/admin','Enabled for users to choose in personal settings')?></label>
+
+            <h4><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('2fa/admin','Personal settings')?></h4>
+            <?php include(erLhcoreClassDesign::designtpl('2fa/sms/user_settings.tpl.php'));?>
+
+            <div class="btn-group" role="group" aria-label="...">
+                <input type="submit" name="save2fa" class="btn btn-default" value="<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('2fa/admin','Save settings')?>">
+                <input type="submit" name="sendTestSMS" class="btn btn-default" value="<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('2fa/admin','Send test SMS')?>">
             </div>
-            <div class="form-group">
-                <label>Phone</label>
-                <input type="text" name="phone" value="<?php echo $instance->getAttribute('phone');?>" class="form-control" />
-            </div>
-            <input type="submit" name="save2fa" class="btn btn-default" value="<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('2fa/admin','Save settings')?>">
-            <input type="submit" name="sendTestSMS" class="btn btn-default" value="<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('2fa/admin','Send test SMS')?>">
         </form>
     </div>
     <div class="col-xs-6">
