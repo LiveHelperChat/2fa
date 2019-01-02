@@ -40,6 +40,10 @@ if ($session instanceof erLhcoreClassModel2FASession) {
 
         if ($codeValid === true) {
 
+            // Reset so if user re-logins sending works again
+            $secret->lsend = 0;
+            $secret->saveThis();
+
             // Login by session hash will work now
             $session->valid = 1;
             $session->saveThis();
