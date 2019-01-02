@@ -6,7 +6,7 @@
     <?php endif; ?>
     </div>
     <div class="col-xs-12">
-          <p>Please enter the security code below when you receive it. If you haven't received one within the next 2 minutes click re-send.</p>
+          <p><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation("2fa/admin","Please enter the security code below when you receive it. If you haven't received one within the next 2 minutes click re-send.")?></p>
     </div>
     <div class="col-sm-7 col-xs-12">
         <div class="form-group">

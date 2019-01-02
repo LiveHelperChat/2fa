@@ -2,7 +2,7 @@
 
 class erLhcoreClassExtension2FAHandlersms {
 
-    const TIMEOUT_RESEND = 300;
+    const TIMEOUT_RESEND = 120;
 
     public static function getInfo()
     {

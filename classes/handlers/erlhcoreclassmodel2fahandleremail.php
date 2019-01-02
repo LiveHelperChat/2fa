@@ -2,7 +2,7 @@
 
 class erLhcoreClassExtension2FAHandleremail {
 
-    const TIMEOUT_RESEND = 60;
+    const TIMEOUT_RESEND = 120;
 
     public static function getInfo()
     {
