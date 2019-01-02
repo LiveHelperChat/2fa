@@ -8,7 +8,7 @@
         <?php endif;?>
 
         <?php if (isset($smssend)) : ?>
-            <?php $msg = erTranslationClassLhTranslation::getInstance()->getTranslation('2fa/admin','SMS was send'); ?>
+            <?php $msg = erTranslationClassLhTranslation::getInstance()->getTranslation('2fa/admin','SMS was sent'); ?>
             <?php include(erLhcoreClassDesign::designtpl('lhkernel/alert_success.tpl.php'));?>
         <?php endif;?>
 
