@@ -2,6 +2,7 @@
 
 class erLhcoreClassExtension2fa
 {
+
     public function __construct()
     {}
 

@@ -21,6 +21,7 @@ class erLhcoreClassModel2FAUser
             'attr' => $this->attr,
             'enabled' => $this->enabled,
             'default' => $this->default,
+            'lsend' => $this->lsend,
         );
     }
 
@@ -121,6 +122,8 @@ class erLhcoreClassModel2FAUser
     public $method = '';
 
     public $attr = '';
+
+    public $lsend = 0;
 }
 
 ?>

@@ -9,7 +9,7 @@ if ($session instanceof erLhcoreClassModel2FASession) {
     // session has expired
     if ($session->ctime < (time()-(10*60))) {
         $session->removeThis();
-        echo json_encode(array('error' => true, 'url' => erLhcoreClassDesign::baseurl('user/login')));
+        echo json_encode(array('error' => true, 'url' => erLhcoreClassDesign::baseurl('2fa/expired')));
         exit;
     }
 
@@ -49,11 +49,11 @@ if ($session instanceof erLhcoreClassModel2FASession) {
             $session->retries++;
             $session->saveThis();
 
-            if ($session->retries < 3) {
+            if ($session->retries < erLhcoreClassModel2FASession::RETRIES_MAX) {
                 echo json_encode(array('error' => true, 'msg' => erTranslationClassLhTranslation::getInstance()->getTranslation('2fa/admin','Invalid code')));
             } else {
                 $session->removeThis();
-                echo json_encode(array('error' => true, 'url' => erLhcoreClassDesign::baseurl('user/login')));
+                echo json_encode(array('error' => true, 'url' => erLhcoreClassDesign::baseurl('2fa/attemptlimit')));
             }
         }
 

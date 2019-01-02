@@ -34,6 +34,11 @@ $def->properties['attr']->columnName   = 'attr';
 $def->properties['attr']->propertyName = 'attr';
 $def->properties['attr']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_STRING;
 
+$def->properties['lsend'] = new ezcPersistentObjectProperty();
+$def->properties['lsend']->columnName   = 'lsend';
+$def->properties['lsend']->propertyName = 'lsend';
+$def->properties['lsend']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_INT;
+
 return $def;
 
 ?>

@@ -9,7 +9,7 @@ if ($session instanceof erLhcoreClassModel2FASession) {
     // session has expired
     if ($session->ctime < (time()-(10*60))) {
         $session->removeThis();
-        echo json_encode(array('error' => true, 'url' => erLhcoreClassDesign::baseurl('user/login')));
+        echo json_encode(array('error' => true, 'url' => erLhcoreClassDesign::baseurl('2fa/expired')));
         exit;
     }
 
@@ -34,10 +34,10 @@ if ($session instanceof erLhcoreClassModel2FASession) {
             call_user_func('erLhcoreClassExtension2FAHandler'.$Params['user_parameters']['method'].'::prepareSession',array('test' => true, 'session' => & $session, '2fa' => $active2FA));
         }
 
-        if ($session->getAttribute('sms_error') === null) {
-            echo json_encode(array('error' => false, 'msg' => 'Verification code was send!'));
+        if ($session->getAttribute($Params['user_parameters']['method'].'_error') === null) {
+            echo json_encode(array('error' => false, 'msg' => 'We\'ve sent you a verification code.'));
         } else {
-            echo json_encode(array('error' => true, 'msg' => $session->getAttribute('sms_error')));
+            echo json_encode(array('error' => true, 'msg' => $session->getAttribute($Params['user_parameters']['method'] . '_error')));
         }
 
     } else {

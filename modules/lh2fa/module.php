@@ -29,6 +29,18 @@ $ViewList['resend'] = array(
     'functions' => array()
 );
 
+$ViewList['attemptlimit'] = array(
+    'params' => array(),
+    'uparams' => array(),
+    'functions' => array()
+);
+
+$ViewList['expired'] = array(
+    'params' => array(),
+    'uparams' => array(),
+    'functions' => array()
+);
+
 $ViewList['regeneratega'] = array(
     'params' => array('user_id'),
     'uparams' => array(),

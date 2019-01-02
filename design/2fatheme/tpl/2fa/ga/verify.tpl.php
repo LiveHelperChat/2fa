@@ -1,5 +1,8 @@
 <script src="<?php echo erLhcoreClassDesign::designJS('js/2faga.js');?>"></script>
 <div class="row">
+    <div class="col-xs-12">
+          <p>You can obtain a security code from your Google Authenticator App. Please enter the security code below.</p>
+    </div>
     <div class="col-sm-7 col-xs-12">
         <div class="form-group">
             <label><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('2fa/admin','Enter code')?></label>

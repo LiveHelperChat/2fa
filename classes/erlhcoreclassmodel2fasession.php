@@ -85,12 +85,14 @@ class erLhcoreClassModel2FASession
     public $ctime = 0;
 
     public $retries = 0;
-    
+
     public $remember = 0;
 
     public $hash = '';
 
     public $attr = '';
+
+    const RETRIES_MAX = 3;
 }
 
 ?>

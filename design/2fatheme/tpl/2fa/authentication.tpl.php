@@ -22,7 +22,7 @@
             </div>
             <div id="collapse-<?php echo $method->method?>" class="panel-collapse collapse<?php ($method->default == 1) ? print ' in' : ''?>" role="tabpanel" aria-labelledby="heading-<?php echo $method->method?>">
                 <div class="panel-body">
-                    <?php echo $info->getBody($session); ?>
+                    <?php echo $info->getBody($session, $method); ?>
                 </div>
             </div>
         </div>

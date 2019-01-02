@@ -5,6 +5,9 @@
         <?php include(erLhcoreClassDesign::designtpl('lhkernel/validation_error.tpl.php'));?>
     <?php endif; ?>
     </div>
+    <div class="col-xs-12">
+          <p>Please enter the security code below when you receive it. If you haven't received one within the next 2 minutes click re-send.</p>
+    </div>
     <div class="col-sm-7 col-xs-12">
         <div class="form-group">
             <label><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('2fa/admin','Enter code')?></label>
@@ -15,7 +18,7 @@
         <div class="hidden-xs"><label>&nbsp;</label></div>
         <div class="btn-group" role="group">
             <button type="button" class="btn btn-default btn-success" onclick="twofasms.verify($('#smsCode').val())"><i class="material-icons">verified_user</i><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('2fa/admin','Verify')?></button>
-            <button type="button" class="btn btn-info" onclick="twofasms.resend()"><i class="material-icons">sms</i>Send</button>
+            <button type="button" class="btn btn-info" onclick="twofasms.resend()"><i class="material-icons">sms</i><?php if ($method->default == 1) : ?>Re-send<?php else : ?>Send<?php endif; ?></button>
         </div>
     </div>
 </div>

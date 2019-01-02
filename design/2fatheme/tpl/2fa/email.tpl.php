@@ -8,7 +8,7 @@
         <?php endif;?>
 
         <?php if (isset($emailsend)) : ?>
-            <?php $msg = erTranslationClassLhTranslation::getInstance()->getTranslation('2fa/admin','E-Mail was send'); ?>
+            <?php $msg = erTranslationClassLhTranslation::getInstance()->getTranslation('2fa/admin','Test email was sent'); ?>
             <?php include(erLhcoreClassDesign::designtpl('lhkernel/alert_success.tpl.php'));?>
         <?php endif;?>
 
