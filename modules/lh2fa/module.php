@@ -17,6 +17,12 @@ $ViewList['authentication'] = array(
     'functions' => array()
 );
 
+$ViewList['manage'] = array(
+    'params' => array('id'),
+    'uparams' => array(),
+    'functions' => array()
+);
+
 $ViewList['verifycode'] = array(
     'params' => array('hash','method'),
     'uparams' => array(),
