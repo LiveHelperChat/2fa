@@ -1,7 +1,7 @@
 <h1><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('2fa/admin','SMS')?></h1>
 
 <div class="row">
-    <div class="col-xs-6">
+    <div class="col-6">
         <?php if (isset($errors)) : ?>
             <?php include(erLhcoreClassDesign::designtpl('lhkernel/validation_error.tpl.php'));?>
         <?php endif;?>

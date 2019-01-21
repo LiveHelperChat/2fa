@@ -1,7 +1,7 @@
 <h1><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('2fa/admin','SMS')?></h1>
 
 <div class="row">
-    <div class="col-xs-6">
+    <div class="col-6">
 
         <?php if (isset($errors)) : ?>
             <?php include(erLhcoreClassDesign::designtpl('lhkernel/validation_error.tpl.php'));?>
@@ -25,12 +25,12 @@
             <?php include(erLhcoreClassDesign::designtpl('2fa/sms/user_settings.tpl.php'));?>
 
             <div class="btn-group" role="group" aria-label="...">
-                <input type="submit" name="save2fa" class="btn btn-default" value="<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('2fa/admin','Save settings')?>">
-                <input type="submit" name="sendTestSMS" class="btn btn-default" value="<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('2fa/admin','Send test SMS')?>">
+                <input type="submit" name="save2fa" class="btn btn-secondary" value="<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('2fa/admin','Save settings')?>">
+                <input type="submit" name="sendTestSMS" class="btn btn-secondary" value="<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('2fa/admin','Send test SMS')?>">
             </div>
         </form>
     </div>
-    <div class="col-xs-6">
+    <div class="col-6">
         <form action="" method="post">
 
             <?php if (isset($codevalid) && $codevalid === false) : ?>
@@ -46,7 +46,7 @@
                 <input class="form-control" type="text" name="code" value="">
             </div>
 
-            <input type="submit" name="testsms" class="btn btn-default" value="<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('2fa/admin','Verify code')?>">
+            <input type="submit" name="testsms" class="btn btn-secondary" value="<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('2fa/admin','Verify code')?>">
         </form>
     </div>
 </div>

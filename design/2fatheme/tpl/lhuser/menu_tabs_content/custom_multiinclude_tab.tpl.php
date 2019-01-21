@@ -14,15 +14,15 @@
         <?php include(erLhcoreClassDesign::designtpl('lhkernel/alert_success.tpl.php'));?>
     <?php endif;?>
 
-    <ul class="nav nav-tabs" role="tablist">
+    <ul class="nav nav-tabs mb-2" role="tablist">
         <?php if (isset($dataOptions['sms_enabled']) && $dataOptions['sms_enabled'] == true) : ?>
-        <li role="presentation"><a href="#twofa-sms" aria-controls="twofa-sms" role="tab" data-toggle="tab" ><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('user/account','SMS');?></a></li>
+        <li class="nav-item" role="presentation"><a class="nav-link" href="#twofa-sms" aria-controls="twofa-sms" role="tab" data-toggle="tab" ><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('user/account','SMS');?></a></li>
         <?php endif; ?>
         <?php if (isset($dataOptions['email_enabled']) && $dataOptions['email_enabled'] == true) : ?>
-        <li role="presentation"><a href="#twofa-email" aria-controls="twofa-email" role="tab" data-toggle="tab" ><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('user/account','Email');?></a></li>
+        <li class="nav-item" role="presentation"><a class="nav-link" href="#twofa-email" aria-controls="twofa-email" role="tab" data-toggle="tab" ><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('user/account','Email');?></a></li>
         <?php endif; ?>
         <?php if (isset($dataOptions['ga_enabled']) && $dataOptions['ga_enabled'] == true) : ?>
-        <li role="presentation"><a href="#twofa-ga" aria-controls="twofa-ga" role="tab" data-toggle="tab" ><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('user/account','Google Authenticator');?></a></li>
+        <li class="nav-item" role="presentation"><a class="nav-link" href="#twofa-ga" aria-controls="twofa-ga" role="tab" data-toggle="tab" ><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('user/account','Google Authenticator');?></a></li>
         <?php endif; ?>
     </ul>
 
@@ -45,10 +45,10 @@
     </div>
 
     <?php if ($user->id > 0) : ?>
-         <input type="submit" name="savetwofa" value="Save" class="btn btn-default" />
+         <input type="submit" name="savetwofa" value="Save" class="btn btn-secondary" />
         </form>
     <?php else : ?>
-        <input type="submit" class="btn btn-default" name="Update_account" value="<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('system/buttons','Save');?>">
+        <input type="submit" class="btn btn-secondary" name="Update_account" value="<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('system/buttons','Save');?>">
     <?php endif; ?>
 
 </div>

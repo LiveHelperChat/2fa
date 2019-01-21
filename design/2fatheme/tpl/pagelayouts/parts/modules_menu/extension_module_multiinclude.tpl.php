@@ -1,1 +1,1 @@
-<li><a href="<?php echo erLhcoreClassDesign::baseurl('2fa/index')?>">2FA</a></li>
+<li class="nav-item"><a class="nav-link" href="<?php echo erLhcoreClassDesign::baseurl('2fa/index')?>">2FA</a></li>

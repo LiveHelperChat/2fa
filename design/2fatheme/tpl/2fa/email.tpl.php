@@ -1,7 +1,7 @@
 <h1><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('2fa/admin','E-Mail')?></h1>
 
 <div class="row">
-    <div class="col-xs-6">
+    <div class="col-6">
 
         <?php if (isset($errors)) : ?>
             <?php include(erLhcoreClassDesign::designtpl('lhkernel/validation_error.tpl.php'));?>
@@ -32,13 +32,13 @@
 
             <h4><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('2fa/admin','E-Mail settings')?></h4>
             <div class="row">
-                <div class="col-xs-6">
+                <div class="col-6">
                     <div class="form-group">
                         <label><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('2fa/admin','Subject')?></label>
                         <input type="text" class="form-control" name="email_subject" value="<?php (isset($tfaoptions['email_subject']) && $tfaoptions['email_subject'] != '') ? print htmlspecialchars($tfaoptions['email_subject']) : print erTranslationClassLhTranslation::getInstance()->getTranslation('2fa/admin','Your code')?>" />
                     </div>
                 </div>
-                <div class="col-xs-6">
+                <div class="col-6">
                     <div class="form-group">
                         <label><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('2fa/admin','From name')?></label>
                         <input type="text" class="form-control" name="email_from" value="<?php (isset($tfaoptions['email_from']) && $tfaoptions['email_from'] != '') ? print htmlspecialchars($tfaoptions['email_from']) : print erTranslationClassLhTranslation::getInstance()->getTranslation('2fa/admin','2FA Verification')?>" />
@@ -52,12 +52,12 @@
             </div>
 
             <div class="btn-group" role="group" aria-label="...">
-                <input type="submit" name="save2fa" class="btn btn-default" value="<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('2fa/admin','Save settings')?>">
-                <input type="submit" name="sendTestSMS" class="btn btn-default" value="<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('2fa/admin','Send test E-Mail')?>">
+                <input type="submit" name="save2fa" class="btn btn-secondary" value="<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('2fa/admin','Save settings')?>">
+                <input type="submit" name="sendTestSMS" class="btn btn-secondary" value="<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('2fa/admin','Send test E-Mail')?>">
             </div>
         </form>
     </div>
-    <div class="col-xs-6">
+    <div class="col-6">
         <form action="" method="post">
 
             <?php if (isset($codevalid) && $codevalid === false) : ?>
@@ -73,7 +73,7 @@
                 <input class="form-control" type="text" name="code" value="">
             </div>
 
-            <input type="submit" name="testsms" class="btn btn-default" value="<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('2fa/admin','Verify code')?>">
+            <input type="submit" name="testsms" class="btn btn-secondary" value="<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('2fa/admin','Verify code')?>">
         </form>
     </div>
 </div>

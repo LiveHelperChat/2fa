@@ -27,6 +27,6 @@
         </div>
     </div>
 
-    <input type="submit" class="btn btn-default" name="UpdateAgentSMSInfoAction" value="<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('system/buttons','Update');?>" />
+    <input type="submit" class="btn btn-secondary" name="UpdateAgentSMSInfoAction" value="<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('system/buttons','Update');?>" />
 
 </form>

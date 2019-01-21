@@ -1,6 +1,6 @@
 <?php if (isset($errors)) : ?>
     <?php include(erLhcoreClassDesign::designtpl('lhkernel/validation_error.tpl.php'));?>
-    <a class="btn btn-default" href="<?php echo erLhcoreClassDesign::baseurl('user/login')?>">Login</a>
+    <a class="btn btn-secondary" href="<?php echo erLhcoreClassDesign::baseurl('user/login')?>">Login</a>
 <?php else : ?>
 <input type="hidden" id="twofahash" value="<?php echo $hash?>" />
 
@@ -11,7 +11,7 @@
             <div class="panel-heading" role="tab" id="heading-<?php echo $method->method?>">
                 <h4 class="panel-title">
                     <?php if (($img = $info->getImage()) != '') : ?>
-                        <div class="col-xs-4">
+                        <div class="col-4">
                             <img class="img-respnsive" src="<?php echo $info->getImage()?>">
                         </div>
                     <?php endif; ?>

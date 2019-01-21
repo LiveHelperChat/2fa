@@ -1,7 +1,7 @@
 <h1><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('2fa/admin','Google Authentificator')?></h1>
 
 <div class="row">
-    <div class="col-xs-6">
+    <div class="col-6">
         <form action="" method="post">
 
             <?php if (isset($settingsupdated)) : ?>
@@ -15,10 +15,10 @@
             <h4><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('2fa/admin','Personal settings')?></h4>
             <?php include(erLhcoreClassDesign::designtpl('2fa/ga/user_settings.tpl.php'));?>
 
-            <input type="submit" name="save2fa" class="btn btn-default" value="<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('2fa/admin','Save settings')?>">
+            <input type="submit" name="save2fa" class="btn btn-secondary" value="<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('2fa/admin','Save settings')?>">
         </form>
     </div>
-    <div class="col-xs-6">
+    <div class="col-6">
         <form action="" method="post">
 
             <?php if (isset($codevalid) && $codevalid === false) : ?>
@@ -34,7 +34,7 @@
                 <input class="form-control" type="text" name="code" value="">
             </div>
 
-            <input type="submit" name="test2fa" class="btn btn-default" value="<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('2fa/admin','Verify code')?>">
+            <input type="submit" name="test2fa" class="btn btn-secondary" value="<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('2fa/admin','Verify code')?>">
         </form>
     </div>
 </div>
