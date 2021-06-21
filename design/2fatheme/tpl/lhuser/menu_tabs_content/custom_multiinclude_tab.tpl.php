@@ -1,4 +1,4 @@
-<div role="tabpanel" class="tab-pane <?php if ($tab == 'tab_2fa') : ?>active<?php endif;?>" id="twofa">
+<div role="tabpanel" class="tab-pane <?php if ($tab == 'tab_2fa') : ?>active<?php endif;?>" id="twofa" ng-non-bindable>
     <?php
         $t2faOptions = erLhcoreClassModelChatConfig::fetch('2fa_options');
         $dataOptions = (array)$t2faOptions->data;

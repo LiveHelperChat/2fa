@@ -19,7 +19,7 @@
         </form>
     </div>
     <div class="col-6">
-        <form action="" method="post">
+        <form action="" method="post" ng-non-bindable>
 
             <?php if (isset($codevalid) && $codevalid === false) : ?>
                 <?php $errors = array(erTranslationClassLhTranslation::getInstance()->getTranslation('2fa/admin','Code invalid')); ?>

@@ -31,7 +31,7 @@
             </div>
 
             <h4><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('2fa/admin','E-Mail settings')?></h4>
-            <div class="row">
+            <div class="row" ng-non-bindable>
                 <div class="col-6">
                     <div class="form-group">
                         <label><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('2fa/admin','Subject')?></label>
@@ -46,7 +46,7 @@
                 </div>
             </div>
 
-            <div class="form-group">
+            <div class="form-group" ng-non-bindable>
                 <label>Message body</label>
                 <textarea class="form-control" placeholder="Your verification code: {code}" name="email_body"><?php (isset($tfaoptions['email_body'])) ? print htmlspecialchars($tfaoptions['email_body']) : print erTranslationClassLhTranslation::getInstance()->getTranslation('2fa/admin','Verification code: {code}')?></textarea>
             </div>

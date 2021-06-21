@@ -15,7 +15,7 @@
 
 <form action="" method="post" autocomplete="off">
 
-    <div class="tab-content">
+    <div class="tab-content" ng-non-bindable>
         <div role="tabpanel" class="tab-pane active" id="twofa-sms">
             <?php include(erLhcoreClassDesign::designtpl('2fa/manage/sms.tpl.php'));?>
         </div>

@@ -1,6 +1,6 @@
 <h1><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('2fa/admin','E-Mail')?></h1>
 
-<div class="row">
+<div class="row" ng-non-bindable>
     <div class="col-6">
 
         <?php if (isset($errors)) : ?>

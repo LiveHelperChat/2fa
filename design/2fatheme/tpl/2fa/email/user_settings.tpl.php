@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" ng-non-bindable>
     <div class="col-6">
         <div class="form-group">
             <label><input value="on" type="checkbox" <?php if ($instance->enabled == true) : ?>checked="checked"<?php endif;?> name="twofaemailEnabled" /><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('2fa/admin','Enabled')?></label>
