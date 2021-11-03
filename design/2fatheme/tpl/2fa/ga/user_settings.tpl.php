@@ -23,8 +23,12 @@
             $('#twofa-ga-img').attr('src',data.src_loading);
 
             if (data.error == false) {
-                $('#twofa-ga-img').attr('src',data.src);
                 $('#twofa-ga-url').attr('href',data.src);
+
+                setTimeout(function(){
+                    $('#twofa-ga-img').attr('src',data.src);
+                },1000);
+
             } else {
                 alert(data.msg);
             }
