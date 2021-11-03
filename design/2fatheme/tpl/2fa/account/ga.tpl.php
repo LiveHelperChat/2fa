@@ -7,7 +7,7 @@
             $instance->setAttribute('secret', $g->generateSecret());
         }
         
-        $img = \Sonata\GoogleAuthenticator\GoogleQrUrl::generate($user->email, $instance->getAttribute('secret'), erLhcoreClassModule::getExtensionInstance('erLhcoreClassExtension2fa')->settings['ga_title']);
+        $img = \Sonata\GoogleAuthenticator\GoogleQrUrl::generate($user->id, $instance->getAttribute('secret'), erLhcoreClassModule::getExtensionInstance('erLhcoreClassExtension2fa')->settings['ga_title']);
 
     }
 ?><?php include(erLhcoreClassDesign::designtpl('2fa/ga/user_settings.tpl.php'));?>

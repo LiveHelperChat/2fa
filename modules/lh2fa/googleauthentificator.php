@@ -65,7 +65,7 @@ if (ezcInputForm::hasPostData()) {
     }
 }
 
-$link = \Sonata\GoogleAuthenticator\GoogleQrUrl::generate($userData->email, $secret, $ext->settings['ga_title']);
+$link = \Sonata\GoogleAuthenticator\GoogleQrUrl::generate($userData->id, $secret, $ext->settings['ga_title']);
 
 $tpl->set('img', $link);
 $tpl->set('instance', $instance);

@@ -19,7 +19,7 @@ try {
     
     $instance->setAttribute('secret',$secret);
 
-    $link = \Sonata\GoogleAuthenticator\GoogleQrUrl::generate($userData->email, $secret, $ext->settings['ga_title']);
+    $link = \Sonata\GoogleAuthenticator\GoogleQrUrl::generate($userData->id, $secret, $ext->settings['ga_title']);
 
     echo json_encode(array('error' => false, 'src' => $link));
 
