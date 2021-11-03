@@ -20,6 +20,8 @@
 <script>
     function twofaRegenerate() {
         $.postJSON(WWW_DIR_JAVASCRIPT  + '2fa/regeneratega/<?php print $instance->user_id?>', function(data) {
+            $('#twofa-ga-img').attr('src',data.src_loading);
+
             if (data.error == false) {
                 $('#twofa-ga-img').attr('src',data.src);
                 $('#twofa-ga-url').attr('href',data.src);
