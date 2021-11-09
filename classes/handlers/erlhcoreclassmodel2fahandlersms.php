@@ -19,11 +19,13 @@ class erLhcoreClassExtension2FAHandlersms {
         return "SMS Verification";
     }
 
-    public function getBody($session, $method)
+    public function getBody($session, $method, $defaultMethod = '')
     {
         $tpl = new erLhcoreClassTemplate();
-        $tpl->set('session',$session);
-        $tpl->set('method',$method);
+        $tpl->set('session', $session);
+        $tpl->set('method', $method);
+        $tpl->set('default_method', $defaultMethod);
+        
         return $tpl->fetch('2fa/sms/verify.tpl.php');
     }
 

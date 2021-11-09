@@ -19,11 +19,13 @@ class erLhcoreClassExtension2FAHandleremail {
         return "E-Mail Verification";
     }
 
-    public function getBody($session, $method)
+    public function getBody($session, $method, $defaultMethod = '')
     {
         $tpl = new erLhcoreClassTemplate();
         $tpl->set('session',$session);
         $tpl->set('method',$method);
+        $tpl->set('default_method',$defaultMethod);
+        
         return $tpl->fetch('2fa/email/verify.tpl.php');
     }
 

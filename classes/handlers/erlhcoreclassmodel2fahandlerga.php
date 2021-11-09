@@ -17,11 +17,12 @@ class erLhcoreClassExtension2FAHandlerga {
         return "Google Authentificator";
     }
 
-    public function getBody($session, $method)
+    public function getBody($session, $method, $defaultMethod = '')
     {
         $tpl = new erLhcoreClassTemplate();
         $tpl->set('session',$session);
         $tpl->set('method',$method);
+        $tpl->set('default_method',$defaultMethod);
         return $tpl->fetch('2fa/ga/verify.tpl.php');
     }
 

@@ -4,6 +4,17 @@
 <?php else : ?>
 <input type="hidden" id="twofahash" value="<?php echo $hash?>" />
 
+<?php
+$defaultMethod = 'ga';
+foreach ($methods as $method) {
+    $info = $method->getMethodInfo();
+    if (is_object($info) && $method->default == 1) {
+        $defaultMethod = $method->method;
+        break;
+    }
+}
+?>
+
 <div class="accordion" id="accordion" role="tablist" aria-multiselectable="true">
     <?php foreach ($methods as $method) : $info = $method->getMethodInfo();?>
         <?php if (is_object($info)) : ?>
@@ -20,9 +31,9 @@
                     </a>
                 </h6>
             </div>
-            <div id="collapse-<?php echo $method->method?>" class="card-collapse collapse<?php ($method->default == 1) ? print ' show' : ''?>" role="tabpanel" aria-labelledby="heading-<?php echo $method->method?>">
+            <div id="collapse-<?php echo $method->method?>" class="card-collapse collapse<?php ($method->default == 1 || $defaultMethod == $method->method) ? print ' show' : ''?>" role="tabpanel" aria-labelledby="heading-<?php echo $method->method?>">
                 <div class="card-body">
-                    <?php echo $info->getBody($session, $method); ?>
+                    <?php echo $info->getBody($session, $method, $defaultMethod); ?>
                 </div>
             </div>
         </div>

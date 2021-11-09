@@ -3,6 +3,14 @@
         $t2faOptions = erLhcoreClassModelChatConfig::fetch('2fa_options');
         $dataOptions = (array)$t2faOptions->data;
         $twofasingledefault = true;
+        $default2fa = '';
+
+        foreach (['sms_enabled','email_enabled','ga_enabled'] as $tfaProvider) {
+            if (isset($dataOptions[$tfaProvider]) && $dataOptions[$tfaProvider] == true) {
+                $default2fa = $tfaProvider;
+                break;
+            }
+        }
     ?>
 
     <?php if ($user->id > 0) : ?>
@@ -16,29 +24,29 @@
 
     <ul class="nav nav-tabs mb-2" role="tablist">
         <?php if (isset($dataOptions['sms_enabled']) && $dataOptions['sms_enabled'] == true) : ?>
-        <li class="nav-item" role="presentation"><a class="nav-link" href="#twofa-sms" aria-controls="twofa-sms" role="tab" data-toggle="tab" ><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('user/account','SMS');?></a></li>
+        <li class="nav-item" role="presentation"><a class="nav-link<?php if ($default2fa == 'sms_enabled') : ?> active<?php endif; ?>" href="#twofa-sms" aria-controls="twofa-sms" role="tab" data-toggle="tab" ><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('user/account','SMS');?></a></li>
         <?php endif; ?>
         <?php if (isset($dataOptions['email_enabled']) && $dataOptions['email_enabled'] == true) : ?>
-        <li class="nav-item" role="presentation"><a class="nav-link" href="#twofa-email" aria-controls="twofa-email" role="tab" data-toggle="tab" ><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('user/account','Email');?></a></li>
+        <li class="nav-item" role="presentation"><a class="nav-link<?php if ($default2fa == 'email_enabled') : ?> active<?php endif; ?>" href="#twofa-email" aria-controls="twofa-email" role="tab" data-toggle="tab" ><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('user/account','Email');?></a></li>
         <?php endif; ?>
         <?php if (isset($dataOptions['ga_enabled']) && $dataOptions['ga_enabled'] == true) : ?>
-        <li class="nav-item" role="presentation"><a class="nav-link" href="#twofa-ga" aria-controls="twofa-ga" role="tab" data-toggle="tab" ><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('user/account','Google Authenticator');?></a></li>
+        <li class="nav-item" role="presentation"><a class="nav-link<?php if ($default2fa == 'ga_enabled') : ?> active<?php endif; ?>" href="#twofa-ga" aria-controls="twofa-ga" role="tab" data-toggle="tab" ><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('user/account','Google Authenticator');?></a></li>
         <?php endif; ?>
     </ul>
 
     <div class="tab-content">
         <?php if (isset($dataOptions['sms_enabled']) && $dataOptions['sms_enabled'] == true) : ?>
-        <div role="tabpanel" class="tab-pane active" id="twofa-sms">
+        <div role="tabpanel" class="tab-pane<?php if ($default2fa == 'sms_enabled') : ?> active<?php endif; ?>" id="twofa-sms">
             <?php include(erLhcoreClassDesign::designtpl('2fa/account/sms.tpl.php'));?>
         </div>
         <?php endif; ?>
         <?php if (isset($dataOptions['email_enabled']) && $dataOptions['email_enabled'] == true) : ?>
-        <div role="tabpanel" class="tab-pane" id="twofa-email">
+        <div role="tabpanel" class="tab-pane<?php if ($default2fa == 'email_enabled') : ?> active<?php endif; ?>" id="twofa-email">
             <?php include(erLhcoreClassDesign::designtpl('2fa/account/email.tpl.php'));?>
         </div>
         <?php endif; ?>
         <?php if (isset($dataOptions['ga_enabled']) && $dataOptions['ga_enabled'] == true) : ?>
-        <div role="tabpanel" class="tab-pane" id="twofa-ga">
+        <div role="tabpanel" class="tab-pane<?php if ($default2fa == 'ga_enabled') : ?> active<?php endif; ?>" id="twofa-ga">
             <?php include(erLhcoreClassDesign::designtpl('2fa/account/ga.tpl.php'));?>
         </div>
         <?php endif; ?>

@@ -11,7 +11,7 @@
     <div class="col-sm-6 col-12">
         <div class="form-group">
             <label><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('2fa/admin','Enter code')?></label>
-            <input id="emailCode" type="text" class="form-control form-control-sm" value="" />
+            <input id="emailCode" type="text" <?php if ($default_method == 'email') :?>autofocus<?php endif;?> class="form-control form-control-sm" value="" />
         </div>
     </div>
     <div class="col-sm-6 col-12">

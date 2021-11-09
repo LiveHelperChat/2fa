@@ -11,5 +11,6 @@ var twofaga = {
                 }
             }
         });
+        return false;
     }
 }

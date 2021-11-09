@@ -13,12 +13,20 @@
 
 <?php if ($instance->user_id > 0 && isset($img)) : ?>
 <div class="form-group">
-    <div><label><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('2fa/admin','Scan the code with your mobile phone')?>. <a onclick="return twofaRegenerate()"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('2fa/admin','Regenerate')?></a></label></div>
-    <a href="<?php echo $img; ?>" title="<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('2fa/admin','If you do not see an image click me')?>" id="twofa-ga-url"><img id="twofa-ga-img" src="<?php echo $img?>" alt="<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('2fa/admin','If you do not see an image click me')?>" /></a>
+    <div><label><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('2fa/admin','Scan the code with your mobile phone')?>. <a id="2fa-regenerate-click" class="action-image"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('2fa/admin','Regenerate')?></a></label></div>
+    <a href="<?php echo $img; ?>" title="<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('2fa/admin','If you do not see an image click me')?>" id="twofa-ga-url">
+        <img id="twofa-ga-img" src="<?php echo $imgLoader?>" alt="<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('2fa/admin','If you do not see an image click me')?>" />
+    </a>
 </div>
 
 <script>
-    function twofaRegenerate() {
+(function(){
+
+    setTimeout(function(){
+        $('#twofa-ga-img').attr('src','<?php echo $img?>');
+    },1500);
+
+    $('#2fa-regenerate-click').click(function(){
         $.postJSON(WWW_DIR_JAVASCRIPT  + '2fa/regeneratega/<?php print $instance->user_id?>', function(data) {
             $('#twofa-ga-img').attr('src',data.src_loading);
 
@@ -34,6 +42,8 @@
             }
         });
         return false;
-    }
+    });
+
+})();
 </script>
 <?php endif; ?>
