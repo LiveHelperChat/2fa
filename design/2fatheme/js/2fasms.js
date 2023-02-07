@@ -7,7 +7,7 @@ var twofasms = {
                 if (typeof data.url !== 'undefined') {
                     document.location = data.url;
                 } else {
-                    $('#sms-2fa-errors-container').html('<div data-alert="" class="alert alert-danger alert-dismissible fade show"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>'+data.msg+'</div>');
+                    $('#sms-2fa-errors-container').html('<div data-alert="" class="alert alert-danger alert-dismissible fade show"><button type="button" class="close" data-bs-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>'+data.msg+'</div>');
                 }
             }
         });
@@ -15,12 +15,12 @@ var twofasms = {
     resend : function() {
         $.postJSON(WWW_DIR_JAVASCRIPT  + '2fa/resend/' + $('#twofahash').val() + '/sms', function(data) {
             if (data.error == false) {
-                $('#sms-2fa-errors-container').html('<div data-alert="" class="alert alert-info alert-dismissible fade show"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>'+data.msg+'</div>');
+                $('#sms-2fa-errors-container').html('<div data-alert="" class="alert alert-info alert-dismissible fade show"><button type="button" class="close" data-bs-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>'+data.msg+'</div>');
             } else {
                 if (typeof data.url !== 'undefined') {
                     document.location = data.url;
                 } else {
-                    $('#sms-2fa-errors-container').html('<div data-alert="" class="alert alert-danger alert-dismissible fade show"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>'+data.msg+'</div>');
+                    $('#sms-2fa-errors-container').html('<div data-alert="" class="alert alert-danger alert-dismissible fade show"><button type="button" class="close" data-bs-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>'+data.msg+'</div>');
                 }
             }
         });

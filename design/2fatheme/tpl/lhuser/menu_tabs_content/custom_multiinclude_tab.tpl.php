@@ -24,13 +24,13 @@
 
     <ul class="nav nav-tabs mb-2" role="tablist">
         <?php if (isset($dataOptions['sms_enabled']) && $dataOptions['sms_enabled'] == true) : ?>
-        <li class="nav-item" role="presentation"><a class="nav-link<?php if ($default2fa == 'sms_enabled') : ?> active<?php endif; ?>" href="#twofa-sms" aria-controls="twofa-sms" role="tab" data-toggle="tab" ><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('user/account','SMS');?></a></li>
+        <li class="nav-item" role="presentation"><a class="nav-link<?php if ($default2fa == 'sms_enabled') : ?> active<?php endif; ?>" href="#twofa-sms" aria-controls="twofa-sms" role="tab" data-bs-toggle="tab" ><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('user/account','SMS');?></a></li>
         <?php endif; ?>
         <?php if (isset($dataOptions['email_enabled']) && $dataOptions['email_enabled'] == true) : ?>
-        <li class="nav-item" role="presentation"><a class="nav-link<?php if ($default2fa == 'email_enabled') : ?> active<?php endif; ?>" href="#twofa-email" aria-controls="twofa-email" role="tab" data-toggle="tab" ><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('user/account','Email');?></a></li>
+        <li class="nav-item" role="presentation"><a class="nav-link<?php if ($default2fa == 'email_enabled') : ?> active<?php endif; ?>" href="#twofa-email" aria-controls="twofa-email" role="tab" data-bs-toggle="tab" ><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('user/account','Email');?></a></li>
         <?php endif; ?>
         <?php if (isset($dataOptions['ga_enabled']) && $dataOptions['ga_enabled'] == true) : ?>
-        <li class="nav-item" role="presentation"><a class="nav-link<?php if ($default2fa == 'ga_enabled') : ?> active<?php endif; ?>" href="#twofa-ga" aria-controls="twofa-ga" role="tab" data-toggle="tab" ><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('user/account','Google Authenticator');?></a></li>
+        <li class="nav-item" role="presentation"><a class="nav-link<?php if ($default2fa == 'ga_enabled') : ?> active<?php endif; ?>" href="#twofa-ga" aria-controls="twofa-ga" role="tab" data-bs-toggle="tab" ><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('user/account','Google Authenticator');?></a></li>
         <?php endif; ?>
     </ul>
 

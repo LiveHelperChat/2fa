@@ -26,7 +26,7 @@ foreach ($methods as $method) {
                             <img class="img-fluid" src="<?php echo $info->getImage()?>">
                         </div>
                     <?php endif; ?>
-                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse-<?php echo $method->method?>" aria-expanded="true" aria-controls="collapse-<?php echo $method->method?>">
+                    <a role="button" data-bs-toggle="collapse" data-parent="#accordion" href="#collapse-<?php echo $method->method?>" aria-expanded="true" aria-controls="collapse-<?php echo $method->method?>">
                         <?php echo htmlspecialchars($info->getTitle())?>
                     </a>
                 </h6>
