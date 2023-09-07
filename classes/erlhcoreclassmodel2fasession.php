@@ -1,5 +1,5 @@
 <?php
-
+#[\AllowDynamicProperties]
 class erLhcoreClassModel2FASession
 {
     use erLhcoreClassDBTrait;
