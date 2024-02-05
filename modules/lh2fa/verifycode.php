@@ -26,7 +26,11 @@ if ($session instanceof erLhcoreClassModel2FASession) {
         exit;
     }
 
-    $secret = erLhcoreClassModel2FAUser::findOne(array('filter' => array('method' => $Params['user_parameters']['method'], 'enabled' => 1, 'user_id' => $session->user_id)));
+    $secret = erLhcoreClassModel2FAUser::findOne(array('filter' => array('method' => $Params['user_parameters']['method'], 'is_setup' => 0, 'enabled' => 1, 'user_id' => $session->user_id)));
+
+    if (!($secret instanceof erLhcoreClassModel2FAUser)) {
+        $secret = erLhcoreClassModel2FAUser::findOne(array('filter' => array('method' => $Params['user_parameters']['method'], 'is_setup' => 1, 'enabled' => 0, 'user_id' => $session->user_id)));
+    }
 
     if ($secret instanceof erLhcoreClassModel2FAUser) {
 
@@ -42,6 +46,8 @@ if ($session instanceof erLhcoreClassModel2FASession) {
 
             // Reset so if user re-logins sending works again
             $secret->lsend = 0;
+            $secret->is_setup = 0; // Remove that it's setup
+            $secret->enabled = 1;  // Enable it just
             $secret->saveThis();
 
             // Login by session hash will work now
