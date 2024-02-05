@@ -17,6 +17,12 @@ $ViewList['authentication'] = array(
     'functions' => array()
 );
 
+$ViewList['authenticationsetup'] = array(
+    'params' => array('hash'),
+    'uparams' => array(),
+    'functions' => array()
+);
+
 $ViewList['manage'] = array(
     'params' => array('id'),
     'uparams' => array(),
@@ -53,6 +59,11 @@ $ViewList['regeneratega'] = array(
     'functions' => array('use')
 );
 
+$ViewList['regenerategasession'] = array(
+    'params' => array('hash'),
+    'uparams' => array()
+);
+
 $ViewList['loginbyhash'] = array(
     'params' => array('hash'),
     'uparams' => array(),
@@ -72,6 +83,12 @@ $ViewList['sms'] = array(
 );
 
 $ViewList['email'] = array(
+    'params' => array(),
+    'uparams' => array(),
+    'functions' => array('configure')
+);
+
+$ViewList['iprestrictions'] = array(
     'params' => array(),
     'uparams' => array(),
     'functions' => array('configure')

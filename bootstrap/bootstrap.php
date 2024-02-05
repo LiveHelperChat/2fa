@@ -104,6 +104,12 @@ class erLhcoreClassExtension2fa
                     $instance->enabled = 0;
                 }
 
+                if (isset($_POST['twofasmsRequireByIP'])) {
+                    $instance->require_by_ip = 1;
+                } else {
+                    $instance->require_by_ip = 0;
+                }
+
                 if ($params['userData']->id > 0) {
                     $instance->saveThis();
                 }
@@ -124,6 +130,12 @@ class erLhcoreClassExtension2fa
                     $instance->enabled = 0;
                 }
 
+                if (isset($_POST['twofaemailRequireByIP'])) {
+                    $instance->require_by_ip = 1;
+                } else {
+                    $instance->require_by_ip = 0;
+                }
+
                 if ($params['userData']->id > 0) {
                     $instance->saveThis();
                 }
@@ -142,6 +154,12 @@ class erLhcoreClassExtension2fa
                     $instance->enabled = 1;
                 } else {
                     $instance->enabled = 0;
+                }
+
+                if (isset($_POST['twofagaRequireByIP'])) {
+                    $instance->require_by_ip = 1;
+                } else {
+                    $instance->require_by_ip = 0;
                 }
 
                 if ($params['userData']->id > 0) {
@@ -184,6 +202,23 @@ class erLhcoreClassExtension2fa
 
         if (!empty($active2FA)) {
 
+            // Verify that all requires only 2FA for outside IP
+            $outsideIPRequired = true;
+            foreach ($active2FA as $active2FAItem) {
+                if ($active2FAItem->require_by_ip == 0) {
+                    $outsideIPRequired = false;
+                }
+            }
+
+            if ($outsideIPRequired === true) {
+                $t2faOptions = erLhcoreClassModelChatConfig::fetch('2fa_iprestrictions');
+                $dataOptions = (array)$t2faOptions->data;
+                // We are in office ip and all user options does not require 2fa if inside office ip
+                if (isset($dataOptions['ip_restrictions']) && !empty($dataOptions['ip_restrictions']) && erLhcoreClassIPDetect::isIgnored(erLhcoreClassIPDetect::getIP(),explode(',',$dataOptions['ip_restrictions']))){
+                    return;
+                }
+            }
+
             $session = $this->generateSession($params['current_user']->getUserID(),((isset($params['remember']) && $params['remember'] == true) ? 1 : 0), $active2FA);
 
             // Logout user as we will login him after 2fa
@@ -191,6 +226,58 @@ class erLhcoreClassExtension2fa
 
             erLhcoreClassModule::redirect('2fa/authentication','/' . $session->hash);
             exit;
+        } else {
+
+            $t2faOptions = erLhcoreClassModelChatConfig::fetch('2fa_iprestrictions');
+            $dataOptions = (array)$t2faOptions->data;
+            // We are in office ip and all user options does not require 2fa if inside office ip
+            if (isset($dataOptions['ip_restrictions']) && !empty($dataOptions['ip_restrictions'])) {
+                // Operator is not inside our office IP range and we require to setup 2FA first.
+                if (!erLhcoreClassIPDetect::isIgnored(erLhcoreClassIPDetect::getIP(),explode(',',$dataOptions['ip_restrictions'])) && isset($dataOptions['2fa_required_by_ip']) && $dataOptions['2fa_required_by_ip'] == true) {
+
+                    $t2faOptions = erLhcoreClassModelChatConfig::fetch('2fa_options');
+                    $dataOptions = (array)$t2faOptions->data;
+                    $default2fa = '';
+
+                    foreach (['ga_enabled','email_enabled','sms_enabled'] as $tfaProvider) {
+                        if (isset($dataOptions[$tfaProvider]) && $dataOptions[$tfaProvider] == true) {
+                            $default2fa = $tfaProvider;
+                            break;
+                        }
+                    }
+
+                    if (!empty($default2fa)) {
+                        // Setup default 2FA
+
+                        if ($default2fa == 'ga_enabled') {
+                            $instance = erLhcoreClassModel2FAUser::getInstance($params['current_user']->getUserID(), 'ga');
+                            $instance->default = 1;
+                            $instance->enabled = 0;
+                            $instance->is_setup = 1;
+                            $instance->require_by_ip = 1;
+                            if ($instance->getAttribute('secret') === null) {
+                                $g = new \Google\Authenticator\GoogleAuthenticator();
+                                $instance->setAttribute('secret', $g->generateSecret());
+                            }
+                            $instance->saveThis();
+                        } elseif ($default2fa == 'email_enabled') {
+                            $instance = erLhcoreClassModel2FAUser::getInstance($params['current_user']->getUserID(), 'email');
+                            $instance->default = 1;
+                            $instance->enabled = 0;
+                            $instance->is_setup = 1;
+                            $instance->require_by_ip = 1;
+                            $instance->saveThis();
+                        }
+
+                        $session = $this->generateSession($params['current_user']->getUserID(),((isset($params['remember']) && $params['remember'] == true) ? 1 : 0), [$instance]);
+
+                        $params['current_user']->logout();
+
+                        erLhcoreClassModule::redirect('2fa/authenticationsetup','/' . $session->hash);
+                        exit;
+                    }
+                }
+            }
         }
     }
 

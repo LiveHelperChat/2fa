@@ -22,6 +22,8 @@ class erLhcoreClassModel2FAUser
             'enabled' => $this->enabled,
             'default' => $this->default,
             'lsend' => $this->lsend,
+            'require_by_ip' => $this->require_by_ip,
+            'is_setup' => $this->is_setup,
         );
     }
 
@@ -122,6 +124,8 @@ class erLhcoreClassModel2FAUser
     public $method = '';
 
     public $attr = '';
+    public $require_by_ip = 0;
+    public $is_setup = 0;
 
     public $lsend = 0;
 }

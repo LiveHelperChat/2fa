@@ -24,6 +24,16 @@ $def->properties['default']->columnName   = 'default';
 $def->properties['default']->propertyName = 'default';
 $def->properties['default']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_INT;
 
+$def->properties['require_by_ip'] = new ezcPersistentObjectProperty();
+$def->properties['require_by_ip']->columnName   = 'require_by_ip';
+$def->properties['require_by_ip']->propertyName = 'require_by_ip';
+$def->properties['require_by_ip']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_INT;
+
+$def->properties['is_setup'] = new ezcPersistentObjectProperty();
+$def->properties['is_setup']->columnName   = 'is_setup';
+$def->properties['is_setup']->propertyName = 'is_setup';
+$def->properties['is_setup']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_INT;
+
 $def->properties['method'] = new ezcPersistentObjectProperty();
 $def->properties['method']->columnName   = 'method';
 $def->properties['method']->propertyName = 'method';
