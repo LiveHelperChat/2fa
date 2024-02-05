@@ -2,7 +2,7 @@
 <form action="" method="post" onsubmit="return twofaga.verify($('#gaCode').val())">
     <div class="row" ng-non-bindable>
         <div class="col-12">
-              <p>You can obtain a security code from your Google Authenticator App. Please enter the security code below.</p>
+              <p><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('2fa/admin','You can obtain a security code from your Google Authenticator App. Please enter the security code below.')?></p>
         </div>
 
         <?php if (isset($is_setup) && $is_setup === true) : ?>
