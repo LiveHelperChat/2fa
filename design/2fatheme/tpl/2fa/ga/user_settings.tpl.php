@@ -4,7 +4,7 @@
             <label><input value="on" type="checkbox" <?php if ($instance->enabled == true) : ?>checked="checked"<?php endif;?> name="twofagaEnabled" /> <?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('2fa/admin','Enabled')?></label>
         </div>
         <div class="form-group">
-            <label><input value="on" type="checkbox" <?php if ($instance->require_by_ip == true) : ?>checked="checked"<?php endif;?> name="twofagaRequireByIP" /> <?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('2fa/admin','Require even if I login from outside defined IP range. My IP')?> - <span class="badge bg-secondary"><?php echo htmlspecialchars(erLhcoreClassIPDetect::getIP());?></span> </label>
+            <label><input value="on" type="checkbox" <?php if ($instance->require_by_ip == true) : ?>checked="checked"<?php endif;?> name="twofagaRequireByIP" /> <?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('2fa/admin','Require only if I login from outside defined IP range. Your IP')?> - <span class="badge bg-secondary"><?php echo htmlspecialchars(erLhcoreClassIPDetect::getIP());?></span> </label>
             <p><small class="text-muted"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('2fa/admin','If no IP range is defined 2FA will always be required.')?></small></p>
         </div>
     </div>
