@@ -124,7 +124,7 @@ class erLhcoreClassModel2FAUser
     public $method = '';
 
     public $attr = '';
-    public $require_by_ip = 0;
+    public $require_by_ip = 1;
     public $is_setup = 0;
 
     public $lsend = 0;
