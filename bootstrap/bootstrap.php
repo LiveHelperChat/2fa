@@ -13,8 +13,6 @@ class erLhcoreClassExtension2fa
     
     public function registerAutoload()
     {
-    	include 'extension/2fa/vendor/autoload.php';
-
         $dispatcher = erLhcoreClassChatEventDispatcher::getInstance();
 
         $dispatcher->listen('user.2fa_intercept', array($this, 'twoFactorAuthentication'));
