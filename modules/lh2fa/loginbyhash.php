@@ -14,6 +14,12 @@ if ($session instanceof erLhcoreClassModel2FASession) {
     // Remove current session
     $session->removeThis();
 
+    // Reset force logout options
+    $user = erLhcoreClassModelUser::fetch((int)$session->user_id);
+    $user->force_logout = 0;
+    $user->llogin = time();
+    $user->updateThis(['update' => ['force_logout','llogin']]);
+
     // Login user instantly as during password change he verified his logins
     erLhcoreClassUser::instance()->setLoggedUser($session->user_id, $session->remember == 1);
 
