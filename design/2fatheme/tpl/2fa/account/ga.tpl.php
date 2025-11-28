@@ -3,7 +3,7 @@
     if ($user->id > 0) {
 
         if ($instance->getAttribute('secret') === null) {
-            $g = new \Google\Authenticator\GoogleAuthenticator();
+            $g = new \Sonata\GoogleAuthenticator\GoogleAuthenticator();
             $instance->setAttribute('secret', $g->generateSecret());
         }
         

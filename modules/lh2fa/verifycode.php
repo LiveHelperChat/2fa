@@ -36,7 +36,7 @@ if ($session instanceof erLhcoreClassModel2FASession) {
 
         $codeValid = false;
         if ($Params['user_parameters']['method'] == 'ga') {
-            $g = new \Google\Authenticator\GoogleAuthenticator();
+            $g = new \Sonata\GoogleAuthenticator\GoogleAuthenticator();
             $codeValid = $g->checkCode($secret->attr_array['secret'], $_POST['code']);
         } else {
             $codeValid = $session->getAttribute('code') == $_POST['code'];

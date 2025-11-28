@@ -254,7 +254,7 @@ class erLhcoreClassExtension2fa
                             $instance->is_setup = 1;
                             $instance->require_by_ip = 1;
                             if ($instance->getAttribute('secret') === null) {
-                                $g = new \Google\Authenticator\GoogleAuthenticator();
+                                $g = new \Sonata\GoogleAuthenticator\GoogleAuthenticator();
                                 $instance->setAttribute('secret', $g->generateSecret());
                             }
                             $instance->saveThis();

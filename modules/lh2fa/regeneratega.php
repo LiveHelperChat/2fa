@@ -3,7 +3,7 @@
 header ( 'content-type: application/json; charset=utf-8' );
 
 try {
-    $g = new \Google\Authenticator\GoogleAuthenticator();
+    $g = new \Sonata\GoogleAuthenticator\GoogleAuthenticator();
 
     $ext = erLhcoreClassModule::getExtensionInstance('erLhcoreClassExtension2fa');
 

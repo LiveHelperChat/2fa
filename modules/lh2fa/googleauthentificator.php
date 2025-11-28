@@ -2,7 +2,7 @@
 
 $tpl = erLhcoreClassTemplate::getInstance( '2fa/googleauthentificator.tpl.php');
 
-$g = new \Google\Authenticator\GoogleAuthenticator();
+$g = new \Sonata\GoogleAuthenticator\GoogleAuthenticator();
 
 $ext = erLhcoreClassModule::getExtensionInstance('erLhcoreClassExtension2fa');
 
